@@ -14,20 +14,22 @@ datasource db {
 }
 
 model Joke {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   jokeText    String
   author      String
   category    String
-  submittedAt DateTime  @default(now())
-  status      String    @default("unmoderated")
-  moderatedAt DateTime?
-  moderator   String?
+  submittedAt DateTime @default(now())
+  status      String   @default("unmoderated")
+  moderatedAt DateTime @updatedAt
+  moderator   String
 
   @@index([category])
 }
 
 model Category {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  name        String @unique
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
   description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
