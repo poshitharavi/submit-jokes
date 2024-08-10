@@ -20,5 +20,5 @@ RUN npm run build
 # Map the port the app runs on
 EXPOSE 8080
 
-# Start both commands
-CMD ["sh", "-c", "npm run listen & npm run start:dev"]
+# Command to run the app
+CMD [ "npm", "run", "start:prod" ]
