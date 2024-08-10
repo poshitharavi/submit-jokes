@@ -24,15 +24,18 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'submit-jokes--staging'
+      - 'submit-jokes'
       - '--image'
       - 'gcr.io/$PROJECT_ID/submit-jokes:$COMMIT_SHA'
       - '--region'
       - 'us-central1'
       - '--platform'
       - 'managed'
+       - '--set-env-vars=MONGODB_URI=mongodb+srv://jokeUser:cc09UC26vEdEGU92@jokescluster.gqctc.mongodb.net/jokesDatabase?retryWrites=true&w=majority'
       - '--allow-unauthenticated'
-
+substitutions:
+  _SERVICE_NAME: submit-jokes
+  _REGION: us-central1
 images:
   - 'gcr.io/$PROJECT_ID/submit-jokes:$COMMIT_SHA'
 

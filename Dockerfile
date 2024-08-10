@@ -6,7 +6,15 @@ WORKDIR /usr/src/app
 
 # Copy the package.json and package-lock.json (if available) to the container
 COPY package*.json ./
+
+# Install dependencies and Prisma CLI
+RUN npm ci && npm install -g prisma
+
+# Copy the Prisma schema
 COPY prisma ./prisma/
+
+# Generate Prisma client
+RUN prisma generate
 
 # Install dependencies
 RUN npm install
