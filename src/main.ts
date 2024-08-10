@@ -4,7 +4,7 @@ import { Logger } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 
 async function bootstrap() {
-  const port = process.env.PORT || 3011;
+  const port = process.env.PORT || 80;
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
