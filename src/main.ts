@@ -10,7 +10,7 @@ async function bootstrap() {
   app.enableCors();
   dotenv.config();
 
-  const port = process.env.PORT || 8080;
+  const port = 8080;
   await app.listen(port);
   Logger.log(
     `🚀 Submit jokes Application is running on: http://localhost:${port}/${globalPrefix}`,
