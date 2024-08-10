@@ -2,6 +2,7 @@ import {
   Body,
   ConflictException,
   Controller,
+  Inject,
   Logger,
   Post,
   Res,
@@ -11,6 +12,7 @@ import { JokeService } from './joke.service';
 import { CategoryService } from 'src/category/category.service';
 import { CreateJokeDto } from './dtos/create-joke.dto';
 import { getReasonPhrase, StatusCodes } from 'http-status-codes';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('joke')
 export class JokeController {
@@ -19,6 +21,7 @@ export class JokeController {
   constructor(
     private readonly jokeService: JokeService,
     private readonly categoryService: CategoryService,
+    @Inject('JOKE_SERVICE') private readonly client: ClientProxy,
   ) {}
 
   @Post('create')
@@ -27,6 +30,9 @@ export class JokeController {
     @Body() createJokeDto: CreateJokeDto,
   ): Promise<any> {
     try {
+      // Pass the dto to delivery joke
+      this.client.emit('jokeCreate', createJokeDto);
+
       const newJoke = await this.jokeService.createJoke(createJokeDto);
 
       // Add the category
