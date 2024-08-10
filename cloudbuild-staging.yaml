@@ -35,3 +35,5 @@ steps:
 
 images:
   - 'gcr.io/$PROJECT_ID/submit-jokes:$COMMIT_SHA'
+
+serviceAccount: '502810113594-compute@developer.gserviceaccount.com'
